@@ -1,0 +1,50 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('Limpar recursos')
+        {
+            steps
+            {
+                cleanWs()
+            }
+        }
+        stage('Git')
+        {
+            steps
+            {
+               git branch: 'main', url: 'https://github.com/sergiocpxfontes/jenkinspython2'
+            }
+        }
+        stage('Requisitos')
+        {
+            steps
+            {
+                bat 'pip install -r PythonAppJenkins/requirements.txt'
+            }
+        }
+        stage('Run')
+        {
+            steps
+            {
+                bat 'python "PythonAppJenkins/app.py"'
+            }
+        }
+        stage('Executar Testes')
+        {
+            steps
+            {
+                bat 'python "PythonAppJenkins/test.py"'
+            }
+        }
+        stage('Publicar Testes')
+        {
+            steps
+            {
+                junit skipOldReports: true, testResults: '**/relatorio-testes/*.xml'
+            }
+        }
+        
+    }
+}
