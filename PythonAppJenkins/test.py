@@ -20,5 +20,5 @@ class TestCalculadora(unittest.TestCase):
         self.assertEqual(resultado,'sergio fontes')
 
 if __name__ =="__main__":
-    #unittest.main()
-    unittest.main(testRunner = xmlrunner.XMLTestRunner(output='relatorio-testes'))
+    unittest.main()
+    #unittest.main(testRunner = xmlrunner.XMLTestRunner(output='relatorio-testes'))
